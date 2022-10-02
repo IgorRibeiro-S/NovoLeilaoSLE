@@ -2,6 +2,9 @@ package com.fatec.edu.controller;
 
 import java.util.List;
 
+import com.fatec.edu.entities.Financeira;
+import com.fatec.edu.services.FinanceiraServiceImpl;
+
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -11,13 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.fatec.edu.entities.Financeira;
-import com.fatec.edu.interfaces.FinanceiraService;
-
 public class FinanceiraResource extends ServerResource {
 
 	@Autowired
-	private FinanceiraService financeiraService;
+	private FinanceiraServiceImpl financeiraService;
 
 	@Get
 	public List<Financeira> listarFinanceira() {

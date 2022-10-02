@@ -2,6 +2,9 @@ package com.fatec.edu.controller;
 
 import java.util.List;
 
+import com.fatec.edu.entities.Cliente;
+import com.fatec.edu.services.ClienteServiceImpl;
+
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -11,16 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.fatec.edu.entities.Cliente;
-import com.fatec.edu.interfaces.ClienteService;
-
 public class ClienteResource extends ServerResource {
 
 	@Autowired
-	private ClienteService clienteService;
+	private ClienteServiceImpl clienteService;
 
 	@Get
-	public List<Cliente> listarImoveis() {
+	public List<Cliente> listarClientes() {
 		List<Cliente> lista = clienteService.listarClientes();
 		return lista;
 	}

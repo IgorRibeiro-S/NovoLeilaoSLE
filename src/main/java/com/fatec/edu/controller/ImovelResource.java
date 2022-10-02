@@ -2,6 +2,9 @@ package com.fatec.edu.controller;
 
 import java.util.List;
 
+import com.fatec.edu.entities.Imovel;
+import com.fatec.edu.services.ImovelServiceImpl;
+
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -11,13 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.fatec.edu.entities.Imovel;
-import com.fatec.edu.interfaces.ImovelService;
-
 public class ImovelResource extends ServerResource {
 
 	@Autowired
-	private ImovelService imovelService;
+	private ImovelServiceImpl imovelService;
 
 	@Get
 	public List<Imovel> listarImoveis() {

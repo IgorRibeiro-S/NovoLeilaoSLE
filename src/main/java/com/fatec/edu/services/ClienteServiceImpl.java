@@ -14,21 +14,25 @@ public class ClienteServiceImpl implements ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepo;
 
+	@Override
 	public Cliente novoCliente(Cliente cliente) {
 		Cliente obj = clienteRepo.save(cliente);
 		return obj;
 	}
 
+	@Override
 	public Cliente buscarClienteId(Long id) {
 		Optional<Cliente> obj = clienteRepo.findById(id);
 		return obj.get();
 	}
 
+	@Override
 	public void removerCliente(Long id) {
 		buscarClienteId(id);
 		clienteRepo.deleteById(id);
 	}
 
+	@Override
 	public Cliente atualizarCliente(Cliente obj) {
 		Cliente novoCliente = buscarClienteId(obj.getId());
 		atualizarDados(novoCliente, obj);
@@ -36,6 +40,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	}
 
+	@Override
 	public void atualizarDados(Cliente antigo, Cliente novo) {
 		antigo.setCep(novo.getCep());
 		antigo.setCpf(novo.getCpf());
@@ -46,6 +51,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	}
 
+	@Override
 	public List<Cliente> listarClientes() {
 		return clienteRepo.findAll();
 	}

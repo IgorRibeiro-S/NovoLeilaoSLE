@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import com.fatec.edu.entities.enums.ImovelTipo;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Getter
 @Setter
-
+@AllArgsConstructor
 @Entity
 public class Imovel {
 	

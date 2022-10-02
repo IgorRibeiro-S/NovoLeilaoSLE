@@ -2,6 +2,9 @@ package com.fatec.edu.controller;
 
 import java.util.List;
 
+import com.fatec.edu.entities.Veiculo;
+import com.fatec.edu.services.VeiculoServiceImpl;
+
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
@@ -11,13 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.fatec.edu.entities.Veiculo;
-import com.fatec.edu.interfaces.VeiculoService;
-
 public class VeiculoResource extends ServerResource {
 
 	@Autowired
-	private VeiculoService veiculoService;
+	private VeiculoServiceImpl veiculoService;
 
 	@Get
 	public List<Veiculo> listarImoveis() {
