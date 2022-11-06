@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -29,4 +31,7 @@ public class Financeira {
 	private String agencia;
 	private String conta;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_leilao")
+	private Leilao leilao;
 }

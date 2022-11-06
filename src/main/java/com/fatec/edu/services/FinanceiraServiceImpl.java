@@ -1,9 +1,6 @@
 package com.fatec.edu.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fatec.edu.entities.Financeira;
 import com.fatec.edu.interfaces.FinanceiraService;
@@ -11,7 +8,6 @@ import com.fatec.edu.repository.FinanceiraRepository;
 
 public class FinanceiraServiceImpl implements FinanceiraService {
 
-	@Autowired
 	private FinanceiraRepository financeiraRepo;
 
 	public Financeira novoFinanceira(Financeira financeira) {
@@ -20,8 +16,8 @@ public class FinanceiraServiceImpl implements FinanceiraService {
 	}
 
 	public Financeira buscarFinanceiraId(Long id) {
-		Optional<Financeira> obj = financeiraRepo.findById(id);
-		return obj.get();
+	Financeira obj = financeiraRepo.findById(id);
+		return obj;
 	}
 
 	public void removerFinanceira(Long id) {

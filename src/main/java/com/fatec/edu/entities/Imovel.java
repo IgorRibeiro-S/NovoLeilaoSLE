@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fatec.edu.entities.enums.ImovelTipo;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,16 +22,17 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @Entity
-public class Imovel {
+public abstract class Imovel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private ImovelTipo imovelTipo;
 	private String registro;
+	private String tipo;
 	private String endereco;
 	private String descricao;
-
+	private Double valor;
+	
 	@NonNull
 	@ManyToOne
 	@JoinColumn(name = "id_leilao")

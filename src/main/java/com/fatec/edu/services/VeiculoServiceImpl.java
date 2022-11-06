@@ -1,9 +1,6 @@
 package com.fatec.edu.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fatec.edu.entities.Veiculo;
 import com.fatec.edu.interfaces.VeiculoService;
@@ -11,7 +8,6 @@ import com.fatec.edu.repository.VeiculoRepository;
 
 public class VeiculoServiceImpl implements VeiculoService {
 
-	@Autowired
 	private VeiculoRepository veiculoRepo;
 
 	public Veiculo novoVeiculo(Veiculo veiculo) {
@@ -24,8 +20,8 @@ public class VeiculoServiceImpl implements VeiculoService {
 	}
 
 	public Veiculo buscarVeiculoId(Long id) {
-		Optional<Veiculo> obj = veiculoRepo.findById(id);
-		return obj.get();
+		Veiculo obj = veiculoRepo.findById(id);
+		return obj;
 	}
 
 	public void removerVeiculo(Long id) {
@@ -42,13 +38,27 @@ public class VeiculoServiceImpl implements VeiculoService {
 
 	public void atualizarDados(Veiculo antigo, Veiculo novo) {
 		antigo.setDescricao(novo.getDescricao());
-		antigo.setVeiculoTipo(novo.getVeiculoTipo());
 
 	}
 
 	public List<Veiculo> listarVeiculos() {
 
 		return veiculoRepo.findAll();
+	}
+
+	@Override
+	public List<Veiculo> buscarTodosEntreValores(Double valor1, Double valor2) {
+		return veiculoRepo.findAllBetweenValores(valor1, valor2);
+	}
+
+	@Override
+	public List<Veiculo> buscarTodosPorPalavraChave(String palavra) {
+		return veiculoRepo.findAllByPalavraChave(palavra);
+	}
+
+	@Override
+	public List<Veiculo> buscarTodosPorTipo(String tipo) {
+		return veiculoRepo.findAllByTipo(tipo);
 	}
 
 }

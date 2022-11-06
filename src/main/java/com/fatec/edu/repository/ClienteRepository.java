@@ -1,9 +1,42 @@
 package com.fatec.edu.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fatec.edu.entities.Cliente;
 
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public class ClienteRepository {
+
+	public List<Cliente> listaCliente = new ArrayList<>();
+	
+	public Cliente save(Cliente obj) {
+		listaCliente.add(obj);
+		return obj;
+	}
+
+	public Cliente findById(Long id) {
+		for (Cliente cliente : listaCliente) {
+			if (cliente.getId() == id) {
+				return cliente;
+			}
+		}
+		return null;
+	}
+
+	public void deleteById(Long id) {
+		for (Cliente cliente : listaCliente) {
+			if (cliente.getId() == id) {
+				listaCliente.remove(cliente);
+			}
+		}
+	}
+	
+	public List<Cliente> findAll(){
+		return listaCliente;
+	}
+	
+	
+	
+	
 
 }

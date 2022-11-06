@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fatec.edu.entities.enums.VeiculoTipo;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,18 +22,17 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @Entity
-public class Veiculo {
+public abstract class Veiculo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	private VeiculoTipo veiculoTipo;
-	private String tipo;
 	private String marca;
+	private String tipo;
 	private Integer ano;
 	private String modelo;
 	private String descricao;
+	private Double valor;
 
 	@NonNull
 	@ManyToOne

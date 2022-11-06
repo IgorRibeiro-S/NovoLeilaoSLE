@@ -1,17 +1,13 @@
 package com.fatec.edu.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fatec.edu.entities.Leilao;
 import com.fatec.edu.interfaces.LeilaoService;
 import com.fatec.edu.repository.LeilaoRepository;
 
 public class LeilaoServiceImpl implements LeilaoService {
-
-	@Autowired
+	
 	private LeilaoRepository leilaoRepo;
 
 	public Leilao novoLeilao(Leilao leilao) {
@@ -20,8 +16,8 @@ public class LeilaoServiceImpl implements LeilaoService {
 	}
 
 	public Leilao buscarLeilaoId(Long id) {
-		Optional<Leilao> obj = leilaoRepo.findById(id);
-		return obj.get();
+		Leilao obj = leilaoRepo.findById(id);
+		return obj;
 	}
 
 	public void removerLeilao(Long id) {

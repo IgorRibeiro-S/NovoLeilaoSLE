@@ -1,9 +1,6 @@
 package com.fatec.edu.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fatec.edu.entities.Cliente;
 import com.fatec.edu.interfaces.ClienteService;
@@ -11,7 +8,6 @@ import com.fatec.edu.repository.ClienteRepository;
 
 public class ClienteServiceImpl implements ClienteService {
 
-	@Autowired
 	private ClienteRepository clienteRepo;
 
 	@Override
@@ -22,8 +18,8 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente buscarClienteId(Long id) {
-		Optional<Cliente> obj = clienteRepo.findById(id);
-		return obj.get();
+		Cliente obj = clienteRepo.findById(id);
+		return obj;
 	}
 
 	@Override

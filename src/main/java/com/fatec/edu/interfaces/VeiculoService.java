@@ -12,4 +12,7 @@ public interface VeiculoService {
 	public void removerVeiculo(Long id);
 	public Veiculo atualizarVeiculo(Veiculo imovel);
 	public void atualizarDados(Veiculo antigo, Veiculo novo);
+	public List<Veiculo> buscarTodosEntreValores(Double valor1, Double valor2);
+	public List<Veiculo> buscarTodosPorPalavraChave(String palavra);
+	public List<Veiculo> buscarTodosPorTipo(String tipo);
 }
