@@ -169,7 +169,7 @@ Metódos:
 
 Exemplo Body POST:
 
-  {
+    {
         "id": 2,
         "cnpj": "766767",
         "nome": "Banco Bradesco",
