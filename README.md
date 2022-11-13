@@ -178,6 +178,58 @@ Exemplo Body POST:
         "leilao": null
     }
     
+<h3> /api/lance  </h3>  
+
+Metódos: 
+.POST
+.GET
+.PUT
+.DELETE  
+
+Exemplo Body POST:
+
+    {
+        "id": 1,
+        "cliente": {
+            "id": 12,
+            "cpf": "123456",
+            "nome": "Jorge",
+            "telefone": "1231234",
+            "cep": "123124",
+            "email": "jorge@gmail.com"
+        },
+        "valor": 160.95,
+        "data": {
+            "year": 2022,
+            "month": "NOVEMBER",
+            "monthValue": 11,
+            "dayOfMonth": 13,
+            "dayOfWeek": "SUNDAY",
+            "leapYear": false,
+            "dayOfYear": 317,
+            "era": "CE",
+            "chronology": {
+                "id": "ISO",
+                "calendarType": "iso8601"
+            }
+        },
+        "imovel": null,
+        "veiculo": {
+            "id": 44,
+            "tipo": "Veiculo",
+            "marca": "Bilabong",
+            "ano": 2009,
+            "modelo": null,
+            "descricao": "Skate de qualidade",
+            "valor": 50.0,
+            "leilao": null,
+            "eletrico": false,
+            "condicao": "Novo",
+            "peso": 5.55
+        }
+    }
+    
+    
 <h2> FILTROS COM GET </h2>
 <h3> api/imovel/{tipo} </h3> 
 exemplo : http://localhost:8080/api/imovel/casa
