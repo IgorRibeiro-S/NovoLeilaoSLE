@@ -1,44 +1,45 @@
 package com.fatec.edu.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fatec.edu.entities.Cliente;
-import com.fatec.edu.services.ClienteServiceImpl;
+import com.fatec.edu.repository.ClienteRepository;
 
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 import org.restlet.resource.ServerResource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 public class ClienteResource extends ServerResource {
 
-	@Autowired
-	private ClienteServiceImpl clienteService;
+	public ClienteRepository listaCliente = new ClienteRepository();
 
-	@Get
-	public List<Cliente> listarClientes() {
-		List<Cliente> lista = clienteService.listarClientes();
-		return lista;
+	@Delete
+	public void removerCliente(Integer id) {
+		listaCliente.removerCliente(id);
+	}
+
+	@Put
+	public void atualizarCliente(Integer id, Cliente cliente) {
+		listaCliente.atualizarCliente(id, cliente);
+
+	}
+
+	public void atualizarDados(Cliente antigo, Cliente novo) {
+		listaCliente.atualizarDados(antigo, novo);
+
 	}
 
 	@Post
-	public Cliente novoCliente(@RequestBody Cliente cliente) {
-		return clienteService.novoCliente(cliente);
+	public void novoCliente(Cliente cliente) {
+		listaCliente.novoCliente(cliente);
+
 	}
-	
-	@Put(value = "/{id}")
-	public Cliente atualizarCliente(@PathVariable("id") Long id, @RequestBody Cliente obj) {
-		obj.setId(id);
-		return clienteService.atualizarCliente(obj);
+
+	@Get
+	public Set<Cliente> listarClientes() {
+		return listaCliente.listarClientes();
 	}
-	
-	@Delete(value = "/{id}")
-	public void excluirCliente(@PathVariable("id") Long id) {
-		clienteService.removerCliente(id);
-	}
-	
+
 }

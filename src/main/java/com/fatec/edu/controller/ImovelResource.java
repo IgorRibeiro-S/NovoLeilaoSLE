@@ -1,44 +1,45 @@
 package com.fatec.edu.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fatec.edu.entities.Imovel;
-import com.fatec.edu.services.ImovelServiceImpl;
+import com.fatec.edu.repository.ImovelRepository;
 
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 import org.restlet.resource.ServerResource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 public class ImovelResource extends ServerResource {
 
-	@Autowired
-	private ImovelServiceImpl imovelService;
+	public ImovelRepository listaImovel = new ImovelRepository();
 
-	@Get
-	public List<Imovel> listarImoveis() {
-		List<Imovel> lista = imovelService.listarImoevis();
-		return lista;
+	@Delete
+	public void removerImovel(Integer id) {
+		listaImovel.removerImovel(id);
+	}
+
+	@Put
+	public void atualizarImovel(Integer id, Imovel imovel) {
+		listaImovel.atualizarImovel(id, imovel);
+
+	}
+
+	public void atualizarDados(Imovel antigo, Imovel novo) {
+		listaImovel.atualizarDados(antigo, novo);
+
 	}
 
 	@Post
-	public Imovel novoImovel(@RequestBody Imovel imovel) {
-		return imovelService.novoImovel(imovel);
+	public void novoImovel(Imovel imovel) {
+		listaImovel.novoImovel(imovel);
+
 	}
-	
-	@Put(value = "/{id}")
-	public Imovel atualizarImovel(@PathVariable("id") Long id, @RequestBody Imovel obj) {
-		obj.setId(id);
-		return imovelService.atualizarImovel(obj);
+
+	@Get
+	public Set<Imovel> listarImovels() {
+		return listaImovel.listarImovels();
 	}
-	
-	@Delete(value = "/{id}")
-	public void excluirImovel(@PathVariable("id") Long id) {
-		imovelService.removerImovel(id);
-	}
-	
+
 }

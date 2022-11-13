@@ -1,73 +1,75 @@
 package com.fatec.edu.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fatec.edu.entities.Veiculo;
+import com.fatec.edu.entities.VeiculoCarro;
+import com.fatec.edu.entities.VeiculoSkate;
+import com.fatec.edu.services.VeiculoService;
 
-public class VeiculoRepository {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-	public List<Veiculo> listaVeiculo = new ArrayList<>();
+@ToString
+@EqualsAndHashCode
+@Getter
+@Setter
+public class VeiculoRepository implements VeiculoService {
 
-	public Veiculo save(Veiculo obj) {
-		listaVeiculo.add(obj);
-		return obj;
+	private Set<Veiculo> veiculos = new HashSet<>();
+
+	private VeiculoSkate veiculo1 = new VeiculoSkate(44, "Veiculo", "Bilabong", 2009, null, "Skate de qualidade", 50.00,
+			null, false, "Novo", 5.55);
+
+	private VeiculoCarro veiculo2 = new VeiculoCarro(19, "Veiculo", "Nissan", 2012, "Versa", "Carro Semi novo", 48000.00,
+			null, true, "Prata",2021, "APROVADO");
+	
+	@Override
+	public Set<Veiculo> listarVeiculos() {
+		veiculos.add(veiculo1);
+		veiculos.add(veiculo2);
+		return veiculos;
 	}
 
-	public Veiculo findById(Long id) {
-		for (Veiculo veiculo : listaVeiculo) {
+	@Override
+	public void novoVeiculo(Veiculo veiculo) {
+		veiculos.add(veiculo);
+		veiculos.add(veiculo1);
+		veiculos.add(veiculo2);
+
+	}
+
+	@Override
+	public void atualizarDados(Veiculo obj, Veiculo veiculo) {
+		obj.setDescricao(veiculo.getDescricao());
+		obj.setTipo(veiculo.getTipo());
+		obj.setValor(veiculo.getValor());
+
+	}
+
+	@Override
+	public void removerVeiculo(Integer id) {
+		for (Veiculo veiculo : listarVeiculos()) {
 			if (veiculo.getId() == id) {
-				return veiculo;
+				veiculos.remove(veiculo);
 			}
 		}
-		return null;
+
 	}
 
-	public void deleteById(Long id) {
-		for (Veiculo veiculo : listaVeiculo) {
-			if (veiculo.getId() == id) {
-				listaVeiculo.remove(veiculo);
+	@Override
+	public void atualizarVeiculo(Integer id, Veiculo veiculo) {
+		for (Veiculo obj : veiculos) {
+			if (obj.getId() == id) {
+				obj.setDescricao(veiculo.getDescricao());
+				obj.setTipo(veiculo.getTipo());
+				obj.setValor(veiculo.getValor());
+				veiculos.add(veiculo);
 			}
 		}
 	}
-	
-	public List<Veiculo> findAll(){
-		return listaVeiculo;
-	}
-	
-	public List<Veiculo> findAllBetweenValores(Double valor1, Double valor2){
-		List<Veiculo> listaValores = new ArrayList<>();
-		for(Veiculo veiculo : listaVeiculo) {
-			if(veiculo.getValor() > valor1 && veiculo.getValor() < valor2) {
-				listaValores.add(veiculo);
-			}		
-		}return listaValores;
-		
-	}
-	
-
-	public List<Veiculo> findAllByPalavraChave(String palavra) {
-		List<Veiculo> listaPalavra = new ArrayList<>();
-		for (Veiculo veiculo : listaVeiculo) {
-			if (veiculo.getDescricao().contains(palavra)) {
-				listaPalavra.add(veiculo);
-			}
-		}
-		return listaPalavra;
-	}
-
-	public List<Veiculo> findAllByTipo(String tipo) {
-		List<Veiculo> listaTipo = new ArrayList<>();
-		for (Veiculo veiculo : listaVeiculo) {
-			if (veiculo.getTipo().contains(tipo)) {
-				listaTipo.add(veiculo);
-			}
-		}
-		return listaTipo;
-	}
-	
-	
-	
-	
 
 }

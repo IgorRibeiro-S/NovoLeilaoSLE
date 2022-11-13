@@ -4,13 +4,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,26 +15,35 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Getter
 @Setter
-@AllArgsConstructor
-@Entity
+
 public class Leilao {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private Instant dataLeilao;
 	private String estado;
 	private String cidade;
 	private String endereco;
 	private LocalDate data;
-	
-	@OneToMany(mappedBy = "leilao")
+	private String status;
+
 	private List<Imovel> imoveis;
 
-	@OneToMany(mappedBy = "leilao")
 	private List<Veiculo> veiculos;
-	
-	@OneToMany(mappedBy = "leilao")
+
 	private List<Financeira> financeira;
-	
+
+	public Leilao(Integer id, String estado, String status,  String cidade, String endereco, LocalDate data, List<Imovel> imoveis,
+			List<Veiculo> veiculos, List<Financeira> financeira) {
+		super();
+		this.id = id;
+		this.dataLeilao = Instant.now();
+		this.estado = estado;
+		this.cidade = cidade;
+		this.endereco = endereco;
+		this.data = data;
+		this.status = status;
+		this.imoveis = imoveis;
+		this.veiculos = veiculos;
+		this.financeira = financeira;
+	}
 }

@@ -1,44 +1,45 @@
 package com.fatec.edu.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fatec.edu.entities.Financeira;
-import com.fatec.edu.services.FinanceiraServiceImpl;
+import com.fatec.edu.repository.FinanceiraRepository;
 
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 import org.restlet.resource.ServerResource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 public class FinanceiraResource extends ServerResource {
 
-	@Autowired
-	private FinanceiraServiceImpl financeiraService;
+	public FinanceiraRepository listaFinanceira = new FinanceiraRepository();
 
-	@Get
-	public List<Financeira> listarFinanceira() {
-		List<Financeira> lista = financeiraService.listarFinanceiras();
-		return lista;
+	@Delete
+	public void removerFinanceira(Integer id) {
+		listaFinanceira.removerFinanceira(id);
+	}
+
+	@Put
+	public void atualizarFinanceira(Integer id, Financeira financeira) {
+		listaFinanceira.atualizarFinanceira(id, financeira);
+
+	}
+
+	public void atualizarDados(Financeira antigo, Financeira novo) {
+		listaFinanceira.atualizarDados(antigo, novo);
+
 	}
 
 	@Post
-	public Financeira novoFinanceira(@RequestBody Financeira financeira) {
-		return financeiraService.novoFinanceira(financeira);
+	public void novoFinanceira(Financeira financeira) {
+		listaFinanceira.novoFinanceira(financeira);
+
 	}
-	
-	@Put(value = "/{id}")
-	public Financeira atualizarFinanceira(@PathVariable("id") Long id, @RequestBody Financeira obj) {
-		obj.setId(id);
-		return financeiraService.atualizarFinanceira(obj);
+
+	@Get
+	public Set<Financeira> listarFinanceiras() {
+		return listaFinanceira.listarFinanceiras();
 	}
-	
-	@Delete(value = "/{id}")
-	public void excluirFinanceira(@PathVariable("id") Long id) {
-		financeiraService.removerFinanceira(id);
-	}
-	
+
 }

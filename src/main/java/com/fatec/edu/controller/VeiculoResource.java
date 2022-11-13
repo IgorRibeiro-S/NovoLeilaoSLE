@@ -1,44 +1,45 @@
 package com.fatec.edu.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fatec.edu.entities.Veiculo;
-import com.fatec.edu.services.VeiculoServiceImpl;
+import com.fatec.edu.repository.VeiculoRepository;
 
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 import org.restlet.resource.ServerResource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 public class VeiculoResource extends ServerResource {
 
-	@Autowired
-	private VeiculoServiceImpl veiculoService;
+	public VeiculoRepository listaVeiculo = new VeiculoRepository();
 
-	@Get
-	public List<Veiculo> listarImoveis() {
-		List<Veiculo> lista = veiculoService.listarVeiculos();
-		return lista;
+	@Delete
+	public void removerVeiculo(Integer id) {
+		listaVeiculo.removerVeiculo(id);
+	}
+
+	@Put
+	public void atualizarVeiculo(Integer id, Veiculo veiculo) {
+		listaVeiculo.atualizarVeiculo(id, veiculo);
+
+	}
+
+	public void atualizarDados(Veiculo antigo, Veiculo novo) {
+		listaVeiculo.atualizarDados(antigo, novo);
+
 	}
 
 	@Post
-	public Veiculo novoVeiculo(@RequestBody Veiculo veiculo) {
-		return veiculoService.novoVeiculo(veiculo);
+	public void novoVeiculo(Veiculo veiculo) {
+		listaVeiculo.novoVeiculo(veiculo);
+
 	}
-	
-	@Put(value = "/{id}")
-	public Veiculo atualizarVeiculo(@PathVariable("id") Long id, @RequestBody Veiculo obj) {
-		obj.setId(id);
-		return veiculoService.atualizarVeiculo(obj);
+
+	@Get
+	public Set<Veiculo> listarVeiculos() {
+		return listaVeiculo.listarVeiculos();
 	}
-	
-	@Delete(value = "/{id}")
-	public void excluirVeiculo(@PathVariable("id") Long id) {
-		veiculoService.removerVeiculo(id);
-	}
-	
+
 }

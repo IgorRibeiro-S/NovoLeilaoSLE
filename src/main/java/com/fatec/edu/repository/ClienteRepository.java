@@ -1,42 +1,71 @@
 package com.fatec.edu.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fatec.edu.entities.Cliente;
+import com.fatec.edu.services.ClienteService;
 
-public class ClienteRepository {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-	public List<Cliente> listaCliente = new ArrayList<>();
-	
-	public Cliente save(Cliente obj) {
-		listaCliente.add(obj);
-		return obj;
+@ToString
+@EqualsAndHashCode
+@Getter
+@Setter
+public class ClienteRepository implements ClienteService {
+	private Set<Cliente> clientes = new HashSet<>();
+
+	Cliente cli1 = new Cliente(12, "123456", "Jorge", "1231234", "123124", "jorge@gmail.com");
+	Cliente cli2 = new Cliente(13, "123456", "Cleiton", "12344", "454545", "cleiton@gmail.com");
+
+	@Override
+	public Set<Cliente> listarClientes() {
+		clientes.add(cli1);
+		clientes.add(cli2);
+		return clientes;
 	}
 
-	public Cliente findById(Long id) {
-		for (Cliente cliente : listaCliente) {
+	@Override
+	public void novoCliente(Cliente cliente) {
+		clientes.add(cliente);
+		clientes.add(cli1);
+		clientes.add(cli2);
+
+	}
+
+	@Override
+	public void removerCliente(Integer id) {
+		for (Cliente cliente : listarClientes()) {
 			if (cliente.getId() == id) {
-				return cliente;
+				clientes.remove(cliente);
 			}
 		}
-		return null;
+
 	}
 
-	public void deleteById(Long id) {
-		for (Cliente cliente : listaCliente) {
-			if (cliente.getId() == id) {
-				listaCliente.remove(cliente);
+	@Override
+	public void atualizarCliente(Integer id, Cliente cliente) {
+		for (Cliente cli : clientes) {
+			if (cli.getId() == id) {
+				cli.setCep(cliente.getCep());
+				cli.setCpf(cliente.getCpf());
+				clientes.add(cliente);
 			}
 		}
-	}
-	
-	public List<Cliente> findAll(){
-		return listaCliente;
-	}
-	
-	
-	
-	
 
+	}
+
+	@Override
+	public void atualizarDados(Cliente antigo, Cliente novo) {
+		antigo.setCep(novo.getCep());
+		antigo.setCpf(novo.getCpf());
+		antigo.setCep(novo.getCep());
+		antigo.setEmail(novo.getEmail());
+		antigo.setNome(novo.getNome());
+		antigo.setTelefone(novo.getTelefone());
+
+	}
 }

@@ -1,44 +1,45 @@
 package com.fatec.edu.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fatec.edu.entities.Leilao;
-import com.fatec.edu.services.LeilaoServiceImpl;
+import com.fatec.edu.repository.LeilaoRepository;
 
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.Put;
 import org.restlet.resource.ServerResource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 public class LeilaoResource extends ServerResource {
 
-	@Autowired
-	private LeilaoServiceImpl leilaoService;
+	public LeilaoRepository listaLeilao = new LeilaoRepository();
 
-	@Get
-	public List<Leilao> listarLeiloes() {
-		List<Leilao> lista = leilaoService.listarLeiloes();
-		return lista;
+	@Delete
+	public void removerLeilao(Integer id) {
+		listaLeilao.removerLeilao(id);
+	}
+
+	@Put
+	public void atualizarLeilao(Integer id, Leilao leilao) {
+		listaLeilao.atualizarLeilao(id, leilao);
+
+	}
+
+	public void atualizarDados(Leilao antigo, Leilao novo) {
+		listaLeilao.atualizarDados(antigo, novo);
+
 	}
 
 	@Post
-	public Leilao novoLeilao(@RequestBody Leilao leilao) {
-		return leilaoService.novoLeilao(leilao);
+	public void novoLeilao(Leilao leilao) {
+		listaLeilao.novoLeilao(leilao);
+
 	}
-	
-	@Put(value = "/{id}")
-	public Leilao atualizarLeilao(@PathVariable("id") Long id, @RequestBody Leilao obj) {
-		obj.setId(id);
-		return leilaoService.atualizarLeilao(obj);
+
+	@Get
+	public Set<Leilao> listarLeilaos() {
+		return listaLeilao.listarLeilaos();
 	}
-	
-	@Delete(value = "/{id}")
-	public void excluirLeilao(@PathVariable("id") Long id) {
-		leilaoService.removerLeilao(id);
-	}
-	
+
 }

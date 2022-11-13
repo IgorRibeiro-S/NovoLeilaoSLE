@@ -1,28 +1,26 @@
 package com.fatec.edu.entities;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-public abstract class Imovel {
+public class Lance {
 	
 	private Integer id;
-	private String registro;
-	private String tipo;
-	private String endereco;
-	private String descricao;
+	private Cliente cliente;
 	private Double valor;
-	
-
-	private Leilao leilao;
+	private LocalDate data;
+	private Imovel imovel;
+	private Veiculo veiculo;
 
 }
