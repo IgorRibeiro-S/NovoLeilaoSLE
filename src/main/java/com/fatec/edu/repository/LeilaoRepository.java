@@ -89,7 +89,7 @@ public class LeilaoRepository implements LeilaoService {
 				if (obj.getData().getDayOfMonth() == now.getDayOfMonth()) {
 					obj.setStatus("EM ANDAMENTO");
 				} else {
-					obj.setStatus("EM ANDAMENTO");
+					obj.setStatus("FINALIZADO");
 				}
 				leilaos.add(obj);
 			}
